@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' >
+    <link rel="SHORTCUT ICON" href='/images/pm25.ico' >
+  </head>
+  <body>
+    <center>
+      <table>
+        <tr>
+          <td colspan="4">
+            <form>
+              <select name="city">
+                  <% for(var i = 0; i < list.length; i++){ %>
+                    <% if(code == i){ %>
+                    <option value="<%= i %>" selected="selected"> <%= list[i] %>
+                    <% }else{ %>
+                    <option value="<%= i %>"> <%= list[i] %>
+                    <% } %>
+                  <% } %>
+              </select>
+              <input type="submit" value="查詢">
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td width="75px"><p><%= data.County %></p></td>
+          <td width="250px"><p><%= data.SiteName %></p></td>
+          <td rowspan="4" colspan="2" id="right" width="200">
+            <p style="text-align:left;margin:0px">PM2.5濃度：</p><br>
+            <p style="font-size:115px;margin:0px;color:rgb(<%= r %>,<%= g %>,<%= b %>);text-shadow: 2px 2px 2px #A9A9A9"><%= data["PM2.5"] %></p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <p> 
+              <% if(data.MajorPollutant){ %>
+              <%= '主要汙染：' + data.MajorPollutant %>
+              <% }else{ %>
+              <p>無汙染</p>
+              <% } %>        
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <p>PSI（空氣汙染指標）：<%= data.PSI %></p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <p>上次更新：<%= data.PublishTime %></p>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>
